@@ -63,7 +63,7 @@ int main(void){
 	char str2[]="wuranghao     ";//空格（5个）在字符串最后面
 	char str3[]="wu     rang     hao";//在中间（5个） 
 	char str4[]="     wu     rang     hao     " ;//空格在字符串的前面、中间、后面均存在 (5个)
-	char str5[4];//即str5为NULL 
+	//char *str5;//即str5为NULL 
 	char str6[]="" ;
 	char str7[]=" "; //有一个空格 
 	char str8[]="     ";//有5个空格 
@@ -71,7 +71,7 @@ int main(void){
 	replaceBlank1(str2,100);
 	replaceBlank1(str3,100);
 	replaceBlank1(str4,100);
-	replaceBlank1(str5,100);
+	replaceBlank1(NULL,100);
 	replaceBlank1(str6,100);
 	replaceBlank1(str7,100);
 	replaceBlank1(str8,100);
