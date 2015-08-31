@@ -20,17 +20,37 @@
 
 
 #include<stdio.h>
+//定义一个全局变量，来标志输入是否有效，当输入无效（ base=0,exponent=-1//特别要注意 ）的时候，该值为true 
+bool  g_InvalidInput=false; 
 bool my_equal(double base,double num){
 	if(base-num<0.0001&&base-num>-0.0001){
 		return true;
 	}
 	return false;
 }
-//定义一个全局变量，来标志输入是否有效，当输入无效（ base=0,exponent=-1//特别要注意 ）的时候，该值为true 
-bool  g_InvalidInput=false; 
- /*
- 一般的思路如下 
- */
+
+/*功能：更高效的完成数值的整数次方的运算 
+比for(int i=0;i<exponent;i++){
+        result*=base;
+    }更高效 
+@param base:基数
+@param exponent:指数  且大于等于0 
+*/
+double PowerWithUnsiginedExponent(double base,int exponent){
+	if(exponent==0){
+		return 1.0;
+	}
+	if(exponent==1){
+		return base;
+	} 
+	double result=PowerWithUnsiginedExponent(base,exponent>>1);
+	result*=result;
+	if(exponent&0x01){
+		result*=base;
+	}
+	return result; 
+	
+}
 double  my_Power(double base,int exponent){
 	g_InvalidInput=false;//初始化为false，目的是为了防止多次调用该函数，g_InvalidInput的标志位被设置为了true，对后面的调用的结果产生一定的影响 
 	//先判断输入是否有效，即判断是否出现了 base=0,exponent=-1这种情况
@@ -52,9 +72,7 @@ double  my_Power(double base,int exponent){
         negative=-1;
         exponent=-exponent; 
     }
-    for(int i=0;i<exponent;i++){
-        result*=base;
-    }
+    result=PowerWithUnsiginedExponent( base, exponent);
    // printf("%lf\n",result);
    // printf("%lf\n",1.0/result);
     return (negative==1?result:(1.0/result));
