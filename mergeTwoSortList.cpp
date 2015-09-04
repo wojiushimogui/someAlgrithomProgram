@@ -66,7 +66,12 @@ ListNode* merge2sortList(ListNode *pHead1,ListNode *pHead2){
 	ListNode *cur1=pHead1;
 	ListNode *cur2=pHead2;
 	while(pHead1->pNext!=NULL&&pHead2->pNext!=NULL){
-		if(cur1->mValue>)
+		if(cur1->mValue<=cur2->mValue){
+			cur1=cur1->pNext; 
+		}
+		else if(cur1->mValue>cur2->mValue){
+			cur2
+		}
 		
 	} 
 	
