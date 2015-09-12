@@ -70,7 +70,7 @@ int getUglyOfNumber(int num){
 int main(void){
 	int num;
 
-	while(scanf("%d",&num)!=EOF){//注意： scanf("%d\n",&num)!=EOF
+	while(scanf("%d",&num)!=EOF){//注意： scanf("%d\n",&num)!=EOF;千万不要加一个\n,否则不能正确的读取出输出的数字，调debug也找不出来数字 
 		printf("%d\n",num);
 		printf("%d\n",getUglyOfNumber(num));
 	}
