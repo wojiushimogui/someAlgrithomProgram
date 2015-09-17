@@ -38,6 +38,7 @@ z
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 //树的节点
 //由于节点是保存在数组中，因此，每个节点的pLeftChild、pRightChild为左右两个节点在节点数组中的下标 
@@ -75,12 +76,12 @@ void mirrorBinaryTree(TreeNode *pNode,int index){
 	
 	
 }
-int i;
+int j=0;
 void saveValueByPreTraversal(TreeNode *pNode,int index,int *preTraversal,int len){
 	if(pNode==NULL||preTraversal==NULL||len<=0||index==-1)
 		return;
-	if(index!=-1&&index<len){
-		preTraversal[i++]=pNode[index].mValue;
+	if(index!=-1&&j<len){
+		preTraversal[j++]=pNode[index].mValue;
 		if(pNode[index].pLeftChild!=-1){
 			saveValueByPreTraversal(pNode,pNode[index].pLeftChild,preTraversal,len);
 		}
@@ -94,7 +95,7 @@ int main(void){
 	//在得到二叉树的镜像的之前，我们需要创建一个树
 	int n;
 	while(scanf("%d",&n)!=EOF){
-		TreeNode *pNode;
+		TreeNode *pNode=NULL;
 		if(n>0){
 			TreeNode *pNode=(TreeNode*)malloc(n*sizeof(TreeNode));
 			
@@ -112,32 +113,48 @@ int main(void){
 				pNode[i].pRightChild=-1;
 			}
 			//接下来开始接受每个节点的左右节点
-			int leftIndex;
-			int rightIndex;
+			
 			for(int i=0;i<n;i++){
 				char ch;
-				scanf("%d",&ch);
+				while(getchar()!='\n'){
+					continue;
+				}
+				scanf("%c",&ch);//注意：这里是%c 
+				
+			
 				if(ch=='d'){//此节点有左右两个节点
+			
+					int leftIndex;
+					int rightIndex;
 					 
-					 scanf("%d %d",&leftIndex,&rightIndex);//leftIndex为第leftIndex个节点 ，从1开始，因此为存储在数组中，需要减 1 
+					 //scanf("%d %d",&leftIndex,&rightIndex);//leftIndex为第leftIndex个节点 ，从1开始，因此为存储在数组中，需要减 1 
+					 scanf("%d",&leftIndex);
+					 scanf("%d",&rightIndex);
 					 pNode[i].pLeftChild=leftIndex-1;
 					 pNode[i].pRightChild=rightIndex-1;
+					
 					 
 				}
 				else if(ch=='l'){
+					
+					int leftIndex;
 					scanf("%d",&leftIndex);//leftIndex为第leftIndex个节点 ，从1开始，因此为存储在数组中，需要减 1 
 					pNode[i].pLeftChild=leftIndex-1;
+				
 				}
 				else if(ch=='r'){
+					int rightIndex;
 					scanf("%d",&rightIndex);
 					pNode[i].pRightChild=rightIndex-1;
+				
 					
 				}
 				else if(ch=='z'){
 					continue;
 				}
 				else{
-					exit(EXIT_FAILURE);
+					//exit(EXIT_FAILURE);
+					printf("wu");
 				} 
 			
 			}
@@ -153,6 +170,10 @@ int main(void){
 		//按前序遍历将节点中的value保存在一个数组中
 		int * preTraversal;
 		preTraversal=(int *)malloc(n*sizeof(int));
+		if(preTraversal==NULL){
+			exit(EXIT_FAILURE);
+		} 
+		memset(preTraversal,0,n*sizeof(int));
 		saveValueByPreTraversal(pNode,0,preTraversal,n);
 		for(int i=0;i<n;i++){
 			printf("%d",preTraversal[i]);
