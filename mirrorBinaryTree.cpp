@@ -94,6 +94,7 @@ int main(void){
 	//在得到二叉树的镜像的之前，我们需要创建一个树
 	int n;
 	while(scanf("%d",&n)!=EOF){
+		TreeNode *pNode;
 		if(n>0){
 			TreeNode *pNode=(TreeNode*)malloc(n*sizeof(TreeNode));
 			
@@ -154,7 +155,7 @@ int main(void){
 		preTraversal=(int *)malloc(n*sizeof(int));
 		saveValueByPreTraversal(pNode,0,preTraversal,n);
 		for(int i=0;i<n;i++){
-			printf("%d ",preTrversal[i]);
+			printf("%d",preTraversal[i]);
 		}
 	}
 	
